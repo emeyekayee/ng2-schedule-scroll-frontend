@@ -1,0 +1,170 @@
+a:link    {  color: white;  text-decoration: none;}
+a:visited {  color: wheat;  text-decoration: none;}
+
+/******************************************************************************/
+.timespan {
+  position:         absolute;
+  left:             0px;
+}
+
+.flags {
+  color:            #ffff9b;
+}
+
+.blockdiv {
+  position:         absolute;
+  border:           1px solid #1B3B5F; /* $bg-color */
+  font-size:        11px;
+  line-height:      1.2;
+  white-space:      nowrap;
+  overflow:         hidden;
+}
+
+.current-time-cursor {
+  border-left:      1px solid rgba(255,0,0,.65);
+  z-index:          1;
+  width:            1px;
+  height:           4000px;
+  position:         absolute;
+}
+
+.text_locator {
+  position:         absolute;
+  left:             2px;
+  right:            4px;
+  overflow:         hidden;
+}
+
+.schedule-container{
+  position:         relative;
+}
+
+.scrolling-container {
+  overflow-x:       scroll;
+  padding-bottom:   1px;
+  vertical-align:   top;
+  width:            850px;
+  /* height:           150px; */
+  border:           1px solid red;
+  border-left:      0;
+  background:       #1B3B5F; /* $bg-color */
+}
+
+.positioned-container {
+  overflow:         hidden;
+  margin:           1px;
+  margin-top:       0px;
+  width:            140000px;
+  position:         relative;
+}
+
+.labels-container {
+  width:            60px;
+  vertical-align:   top;
+  position:         absolute;
+}
+
+.timespans-container {
+  vertical-align:   top;
+  position:         absolute;
+  left:             65px;
+}
+
+.resource-labels {
+  position:         relative;
+  padding-bottom:   2px;
+  left:             5px;
+  background:       #18385F; /* $bg-color */
+  border:           1px solid red;
+}
+
+
+#scrollbar-hider {
+  width:            811px;   /* per #resource-labels + */
+  height:           20px;    /* #scrolling-container   */
+  background:       #18385F; /* $bg-color */
+  position:         relative;
+  top:              -20px;
+  left:             5px;
+  border-top:       1px solid red;
+}
+
+.rsrcRow {
+  display:          block;
+  margin:           1px;
+  margin-left:      0px;
+}
+/******************************************************************************/
+
+.MetroSummaryRow {
+  height:           24px;
+}
+
+.MetroSummaryRow .text_locator {
+    text-align:     center;
+}
+
+.MetroSummaryRow.blockdiv {
+    height:         22px;
+    padding:        1px;
+    background:     #265990;
+    font-size:      12px;
+    line-height:    1.9;
+}
+
+/******************************************************************************/
+/*  */
+.ZTimeHeaderHourRow, .ZTimeHeaderDayRow {
+  height:           22px;
+   width:           56px;
+}
+.ZTimeHeaderHourRow.rsrclabel, .ZTimeHeaderDayRow.rsrclabel {
+  font-size:    16px;
+}
+
+div.rsrclabel {
+  font-size:    19px;
+  white-space:  nowrap;
+  overflow:     hidden;
+  text-align:   center;
+  color:        rgba(204, 204, 255, 0.5);
+}
+
+div.rsrclabel img {
+  height:       22px;
+  width:        56px; 
+}
+
+.ZTimeHeaderHourRow .text_locator, .ZTimeHeaderDayRow .text_locator {
+    text-align:     center;
+}
+
+.ZTimeHeaderHourRow.blockdiv, .ZTimeHeaderDayRow.blockdiv {
+    height:         20px;
+    padding:        1px;
+    background:     #265990;
+    font-size:      14px;
+}
+
+.ZTimeHeaderHourRow.blockdiv {
+  font-size:      11px;
+  line-height:    1.9;
+}
+
+.ZTimeHeaderDayRow.blockdiv {
+  font-size:      16px;
+  border-right:   1px solid #33669E; /* $daytime-bg */
+  border-left:    1px solid #33669E;
+}
+
+.blockdiv.ZTimeHeaderDayRow { /* background: $daytime-bg; */
+  /* background: #33669E; */
+  background: linear-gradient(to right,
+                #102441, #102441 24%,            /* $nitetime-bg */
+                #33669E 26%, #33669E 74%,        /* $daytime-bg  */
+                #102441 76%, #102441 );          /* $nitetime-bg */
+}
+
+.blockdiv.dayTimeblock  { background: #33669E  } /* $daytime-bg  */
+.blockdiv.niteTimeblock { background: #102441 }  /* $nitetime-bg */
+/******************************************************************************/

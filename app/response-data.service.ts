@@ -25,12 +25,12 @@ export class ResponseDataService {
   // them through http (for now, in-memory-data service).  To avoid that
   // hack, treat what we get from http/in-memory-data as the template
   // and process request with params here.
-  getResponseData(t1, t2, inc): Promise<Response> {
+  getResponseData(t1: number, t2: number, inc: string): Promise<Response> {
     return this.getTestTemplate()
       .then( template => this.processTemplate(template, t1, t2, inc) );
   }
 
-  processTemplate(template, t1, t2, inc) {
+  processTemplate(template: {}, t1: number, t2: number, inc: string) {
     let generator = new ResponseGen(template);
 
     if (!t1) { // default parameters

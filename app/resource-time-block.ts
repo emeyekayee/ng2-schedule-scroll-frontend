@@ -1,7 +1,7 @@
 // Interface for a_time_block
 export interface ResourceTimeBlock {
   rsrc: any,
-  blk: any
+  blk: UseBlock
 }
 
 export interface GeoHash {
@@ -26,8 +26,19 @@ export interface ResponseData {
   meta: Meta
 }
 
+export interface ResponseMeta {
+  meta: Meta
+}
+
 export interface ResourceSpec {
   tag: string,
   title: string,
   label: string
+}
+
+export interface UseBlock {
+  starttime: number,
+  endtime: number,
+  css_classes: string,
+  total_capacity_usage: number
 }

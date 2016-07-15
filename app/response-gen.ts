@@ -1,4 +1,5 @@
-import { ScheduleParams } from './schedule-params';
+import { ScheduleParams }                  from './schedule-params';
+import { ResourceSpec, ResourceTimeBlock } from './resource-time-block';
 
 type Response = any; // Sadly.
 
@@ -40,9 +41,13 @@ export class ResponseGen {
            };
   }
 
-  round_in_units_of(x, unit) {return unit * Math.round(x / unit);}
+  round_in_units_of(x: number, unit: number) {
+    return unit * Math.round(x / unit);
+  }
 
-  floor_in_units_of(x, unit) {return unit * Math.floor(x / unit);}
+  floor_in_units_of(x: number, unit: number) {
+    return unit * Math.floor(x / unit);
+  }
 
   ux_time_now() {return Math.round(new Date().getTime() / 1000);}
 
@@ -53,7 +58,7 @@ export class ResponseGen {
   }
   //////////////////////////////////////////////////////////////////////////////
 
-  generate_response_for(t1, t2, inc) {
+  generate_response_for(t1: number, t2: number, inc: string) {
     this.params = new ScheduleParams(t1, t2, inc);
 
     // time translation delta (whole units of template width)
@@ -76,7 +81,7 @@ export class ResponseGen {
   // Make a copy of each template block with delta_t added to its time values.
   // Add it to the response (to_blocks) only if it fits within the request
   // parameters.  Modifies to_blocks array in-place.
-   generate_time_blocks(from_blocks, to_blocks, delta_t) {
+  generate_time_blocks(from_blocks: {}[], to_blocks: {}[], delta_t: number) {
 
     for (let from_block of from_blocks) {
       let to_block = this.copy_block_at_offset(from_block, delta_t);
@@ -88,7 +93,7 @@ export class ResponseGen {
   }
 
   // Structure of block is: { blk: {starttime: ...} }
-  copy_block_at_offset(from_block, delta_t) {
+  copy_block_at_offset(from_block: {}, delta_t: number) {
     let to_block           = this.dup_object(from_block);
     let blk                = to_block.blk;
 
@@ -109,7 +114,7 @@ export class ResponseGen {
   // Returns true if there is overlap b/t [t1..t2] and [starttime..endtime]
   // As in the server, the inc parameter is used to avoid returning a block
   // twice if it spans requests' t1/t2.
-  filter_block_by_time(block) {
+  filter_block_by_time(block: ResourceTimeBlock) {
     let {t1: t1, t2: t2, inc: inc} = this.params;
     let blk = block.blk;
 
@@ -123,10 +128,10 @@ export class ResponseGen {
   }
 
   resource_tags() {
-    return this.template.meta.rsrcs.map(rsrc => rsrc.tag);
+    return this.template.meta.rsrcs.map((rsrc: ResourceSpec) => rsrc.tag);
   }
 
-  dup_object(obj) {
+  dup_object(obj: {}) {
     return JSON.parse(JSON.stringify(obj));
   }
 }

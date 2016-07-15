@@ -21,17 +21,17 @@ export const routes: RouterConfig = [
   }
 ];
 
-function capitalize(str) {
+function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function is_top_path(path) {
+function is_top_path(path: string) {
   var topOnlyRegex = /^\/[^\/]*$/;
   // Ignore root path ''
   return path && topOnlyRegex.test(path)
 };
 
-function a_for_route(route) {
+function a_for_route(route: {path: string}) {
   var name = route.path || ''; // WAS: route.name
   name = capitalize(name.replace(/^\//, ''));
   return `<a [routerLink]="['${name}']">${name}</a>`;

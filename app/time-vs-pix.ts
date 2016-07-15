@@ -1,4 +1,4 @@
-import {ResponseData,Meta}   from './resource-time-block';
+import { ResponseData, Meta, UseBlock } from './resource-time-block';
 
 // NO  @set_display_parms: ()    => // Browser, etc:  @pixWindow
 // NO  @scroll_to_thi:     ()    ->
@@ -18,11 +18,11 @@ export class TimeVsPix {
   public window_width_pix   = 850;       // aka @pixWindow
 
   // Throttled, set by TimespansDataComponent#scrollMonitor().
-  public scrollLeft = null;
+  public scrollLeft: number;
 
   // DOM has data for time range [dom_time_lo..dom_time_hi] (at least)
-  public dom_time_lo = null;            // aka @tlo
-  public dom_time_hi = null;            // aka @thi
+  public dom_time_lo: number;            // aka @tlo
+  public dom_time_hi: number;            // aka @thi
 
   // Returned from most recent data request (superfluous)
   public meta = {};                     // aka @meta
@@ -53,13 +53,15 @@ export class TimeVsPix {
   nextLo() { return this.dom_time_lo - this.window_width_secs }
 
   // Ignoring base_time offset
-  secsToPixScale(seconds) { return seconds * this.pixPerSec() }
+  secsToPixScale(seconds: number) { return seconds * this.pixPerSec() }
 
   pixPerSec() { return this.window_width_pix / this.window_width_secs }
 
-  pixToSecs(pix) { return this.base_time + Math.round(pix / this.pixPerSec()) }
+  pixToSecs(pix: number) {
+    return this.base_time + Math.round(pix / this.pixPerSec());
+  }
 
-  visible_time_bounds(scrollLeft) {
+  visible_time_bounds(scrollLeft: number) {
     let lVisTime = this.pixToSecs(scrollLeft);
     let rVisTime = lVisTime + this.window_width_secs;
     return [lVisTime, rVisTime]
@@ -88,7 +90,7 @@ export class TimeVsPix {
     return null;
   }
 
-  blockGeoHash(block) {
+  blockGeoHash(block: UseBlock) {
     let [s, e]: number[] = [block.starttime, block.endtime];
     let left: number     = this.secsToPixScale(s - this.base_time);
     let width: number    = this.secsToPixScale(e-s);
@@ -98,9 +100,9 @@ export class TimeVsPix {
 
   uxTimeNow() { return new Date().valueOf() / 1000 }
 
-  uxTimeOffset(ux_time) { return ux_time - this.base_time }
+  uxTimeOffset(ux_time: number) { return ux_time - this.base_time }
 
-  uxTimeOffsetPix(ux_time) {
+  uxTimeOffsetPix(ux_time: number) {
     return this.secsToPixScale( this.uxTimeOffset(ux_time) )
   }
 }

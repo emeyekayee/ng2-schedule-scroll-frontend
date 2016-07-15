@@ -1,12 +1,13 @@
 import { Component, OnInit }        from '@angular/core';
 import { Router }                   from '@angular/router';
 
-import {ResponseDataService}        from './response-data.service';
-import {ResourceSpec, ResponseData} from './resource-time-block';
-import {TimeVsPix}                  from './time-vs-pix';
-import {TimespansDataComponent}     from './timespans-data.component';
-import {ResourceLabelComponent}     from './resource-label.component';
-
+import { ResponseDataService }        from './response-data.service';
+import { ResourceSpec, ResponseData } from './resource-time-block';
+import { ResourceTimeBlock }          from './resource-time-block';
+import { TimeVsPix }                  from './time-vs-pix';
+import { TimespansDataComponent }     from './timespans-data.component';
+import { ResourceLabelComponent }     from './resource-label.component';
+import { ScheduleParams }             from './schedule-params';
 
 @Component({
   selector: 'resource-schedule',
@@ -41,7 +42,7 @@ export class ScheduleComponent implements OnInit {
   public response_data: ResponseData;
   public resource_specs: ResourceSpec[] = []
   public timespans_hash: any = {}; // ResponseData without 'meta' key.
-  public time_pix = null;
+  public time_pix: TimeVsPix;
 
   private _resource_tags: string[];
   private _busy = false;
@@ -56,7 +57,7 @@ export class ScheduleComponent implements OnInit {
     return this.resource_specs.map( resource_spec => resource_spec.tag )
   }
 
-  onMoreDataRequest(event) {
+  onMoreDataRequest(event: ScheduleParams) {
     let { t1, t2, inc } = event;
     this.requestData(t1, t2, inc);
   }
@@ -66,7 +67,7 @@ export class ScheduleComponent implements OnInit {
     this._busy = true;
     return this._responseDataService.getResponseData(t1, t2, inc)
       .then(
-        function (response_data) {
+        function (response_data: ResponseData) {
           this.response_data = response_data;
 
           // Process response data.
@@ -86,7 +87,7 @@ export class ScheduleComponent implements OnInit {
     if (!this._busy) {
       this.getResponse(t1, t2, inc)
         .then(
-          function(response_data) {
+          function(response_data: ResponseData) {
             for (let res_tag in response_data) {
               this.addBlocksForResourceTag(res_tag,
                                            response_data[res_tag],
@@ -97,8 +98,9 @@ export class ScheduleComponent implements OnInit {
     }
   }
 
-  addBlocksForResourceTag(res_tag, new_blocks, inc) {
-
+  addBlocksForResourceTag(res_tag: string,
+                          new_blocks: ResourceTimeBlock[],
+                          inc: string) {
     // Might want to sort these by block.blk.starttime just to be sure.
 
     let to_blocks = this.ensureTimespan(res_tag);
@@ -112,7 +114,7 @@ export class ScheduleComponent implements OnInit {
     }
   }
 
-  ensureTimespan(res_tag): any[] {
+  ensureTimespan(res_tag: string): ResourceTimeBlock[] {
     if (!this.timespans_hash[res_tag]) {
       this.timespans_hash[res_tag] = [];
     }

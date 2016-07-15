@@ -81,7 +81,7 @@ export class TimespansDataComponent implements OnInit {
     }
   }
 
-  scrollMovedEnuf(scrollLeft) {
+  scrollMovedEnuf(scrollLeft: number) {
     if (Math.abs(this.old_scroll - scrollLeft) > 0) {
       this.old_scroll = scrollLeft;
       return true
@@ -89,7 +89,7 @@ export class TimespansDataComponent implements OnInit {
     return false
   }
 
-  kindFromTag(tag) {
+  kindFromTag(tag: string) {
     return tag.split('_')[0]
   }
 

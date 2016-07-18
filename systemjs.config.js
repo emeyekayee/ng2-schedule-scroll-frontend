@@ -4,10 +4,10 @@
  */
 (function(global) {
 
-  var ngVer = '@2.0.0-rc.4'; // lock in the angular package version; do not let it float to current!
+  var ngVer     = '@2.0.0-rc.4';   // package version; do not float to current!
   var routerVer = '@3.0.0-beta.1'; // lock router version
-  var formsVer = '@0.2.0'; // lock forms version
-  var routerDeprecatedVer = '@2.0.0-rc.2'; // temporarily until we update all the guides
+  var formsVer  = '@0.2.0';        // lock forms version
+  var routerDeprecatedVer = '@2.0.0-rc.2'; // until we update all the guides
 
   //map tells the System loader where to look for things
   var map = {
@@ -29,7 +29,8 @@
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
-    'angular2-infinite-scroll':   { main: 'angular2-infinite-scroll.js', defaultExtension: 'js' },
+    'angular2-infinite-scroll':   { main: 'angular2-infinite-scroll.js',
+                                    defaultExtension: 'js' },
   };
 
   var ngPackageNames = [
@@ -52,7 +53,8 @@
   ngPackageNames.forEach(function(pkgName) {
 
     // Bundled (~40 requests):
-    packages['@angular/'+pkgName] = { main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
+    packages['@angular/'+pkgName] = { main: '/bundles/' + pkgName + '.umd.js',
+                                      defaultExtension: 'js' };
 
     // Individual files (~300 requests):
     //packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
